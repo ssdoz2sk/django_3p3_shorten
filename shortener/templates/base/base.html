@@ -1,0 +1,67 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% bootstrap_css %}
+
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body id="body">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="{% url 'landingPage' %}" id="logo" class="navbar-brand">3P3.tw</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="true">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/ssdoz2sk/django_3p3_shorten" target="_blank">Repository</a></li>
+            {% if request.user.is_staff %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                管理 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              </ul>
+            </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{ request.user.first_name }} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="divider"></li>
+                <li>
+                  <a href="{% url 'logout' %}">登出</a>
+                </li>
+              </ul>
+            </li>
+            {% else %}
+            <!--<li><a href="{% url 'social:begin' 'google-oauth2' %}">Google 登入</a></li>-->
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    {% block footerjs %}
+    {% endblock %}
+  </body>
+</html>

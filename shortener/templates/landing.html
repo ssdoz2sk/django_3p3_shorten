@@ -1,0 +1,113 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}3p3.tw{% endblock %}
+
+{% block head %}
+<![if !IE]>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
+<![endif]>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4 col-md-2 col-lg-2">
+          <label class="control-label">網址</label>
+        </div>
+        <div class="col-sm-8 col-md-10 col-lg-10">
+          <div class="input-group">
+            <input type="url" class="form-control" id="url">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" role="button" id="create_button">產生</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="iurl" class="col-md-8" style="display: block; ">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4 col-md-4 col-lg-3">
+          <label class="control-label">QRcode 選項</label>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9">
+          <class class="radio">
+            <label><input  name="qrcode_shorten" type="radio" value="qr_urlshorten" checked>QRCode 缩網址</label><br>
+            <label><input  name="qrcode_shorten" type="radio" value="qr_n_urlshorten">QRCode 原址</label><br>
+          </class>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4 col-md-4 col-lg-3">
+          <label class="control-label">附註 Label 選項</label>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9">
+          <div class="radio">
+            <label><input  name="qrcode_label_shorten" type="radio" value="label_urlshorten" checked>缩網址</label><br>
+            <label><input  name="qrcode_label_shorten" type="radio" value="label_n_urlshorten">原址</label><br>
+            <label><input  name="qrcode_label_shorten" type="radio" value="label_hidden">隱藏</label><br>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4 col-md-4 col-lg-3">
+          <label class="control-label">圖檔尺寸</label>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9">
+          <div class="input-group">
+            <input type="number" min="250" max="500" step="10" class="form-control" id="qrsi" value="300">
+            <span class="input-group-addon">px</span>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group" id="errr">
+        <div class="col-sm-4 col-md-4 col-lg-3">
+            <label class="control-label">容錯率</label>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9">
+          <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default">
+            <input type="radio"  name="correct_level" value="L"> L
+          </label>
+          <label class="btn btn-default">
+            <input type="radio"  name="correct_level" value="M"> M
+          </label>
+          <label class="btn btn-default">
+            <input type="radio"  name="correct_level" value="Q"> Q
+          </label>
+          <label class="btn btn-default active">
+            <input type="radio"  name="correct_level" value="H" checked=""> H
+          </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="iurl" class="col-md-4" style="display: block;">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>縮網址：<a id="shorten_link"></a></h3>
+      </div>
+    </div>
+    <img id="qrbox" height="300" width="300" src="" alt="QR Code">
+    </img>
+    <div class="caption">
+      <p><a href="#" id="dlsubmit" class="btn btn-primary center-block" role="button" download>下載圖檔</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footerjs %}
+  <script src="{% static 'js/qrcode.js' %}"></script>
+  <script src="{% static 'js/landing.js' %}"></script>
+{% endblock %}

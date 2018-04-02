@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% block title %}Logged out{% endblock %}
+
+{% block head %}
+  <meta http-equiv="refresh" content="5;url='/'" />
+{% endblock %}
+
+{% block content %}
+  <h1>已登出</h1>
+  <p>靜待五秒後回到首頁。</p>
+{% endblock %}
